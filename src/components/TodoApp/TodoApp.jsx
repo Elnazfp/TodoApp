@@ -23,9 +23,11 @@ const TodoApp = () => {
     //   },
     // ]);
 
-    let storedTasks = localStorage.getItem('tasks')
+    let storedTasks = localStorage.getItem("tasks");
     if (storedTasks) {
-      storedTasks = JSON.parse(storedTasks)
+      storedTasks = JSON.parse(storedTasks);
+    } else {
+      storedTasks = [];
     }
     setTasks(storedTasks);
   }, []);
@@ -52,24 +54,24 @@ const TodoApp = () => {
         title: taskTitle,
         status: false,
       },
-    ]
+    ];
     setTasks(newTask);
-    localStorage.setItem('tasks', JSON.stringify(newTask))
+    localStorage.setItem("tasks", JSON.stringify(newTask));
   };
 
   const deleteTask = (taskId) => {
     let newTasksList = tasks.filter((task) => task.id !== taskId);
     setTasks(newTasksList);
-    localStorage.setItem('tasks', JSON.stringify(newTasksList))
+    localStorage.setItem("tasks", JSON.stringify(newTasksList));
   };
 
   const handleChangeStatus = (taskId) => {
-    let newTasksList = tasks
-    const taskIndex =tasks.findIndex((task) => task.id === taskId);
+    let newTasksList = tasks;
+    const taskIndex = tasks.findIndex((task) => task.id === taskId);
     newTasksList[taskIndex].status = !newTasksList[taskIndex].status;
     setTasks(newTasksList);
-    localStorage.setItem('tasks', JSON.stringify(newTasksList))
-    setRefresh(refresh+1)
+    localStorage.setItem("tasks", JSON.stringify(newTasksList));
+    setRefresh(refresh + 1);
   };
 
   return (
